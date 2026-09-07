@@ -1,8 +1,8 @@
 # ===================================
-# [Your Program Title]
+# [LIBRARY LENDING BOOK SYSTEM]
 # ===================================
-# Developed by. Bayu Prasetya
-# JCDS - [Class Batch]
+# Developed by. Fransiskus B S
+# JCDS - 34
 
 
 # /************************************/
@@ -37,20 +37,33 @@ def delete():
 # /===== Main Program =====/
 # Create your main program here
 def main():
-    """Function for main program
-    """
+    while True:
 
-    input_user = input("Insert your option: ")
-    if input_user == "1":
-        read()
-    elif input_user == "2":
-        create()
-    elif input_user == "3":
-        update()
-    elif input_user == "4":
-        delete()
-    else:
-        print("Input is not valid !")
+        print("\n=========================================")
+        print("   SISTEM PEMINJAMAN BUKU PERPUSTAKAAN")
+        print("=========================================")
+        print("1. Tampilkan Data Peminjaman")
+        print("2. Tambah Data Peminjaman")
+        print("3. Ubah Data Peminjaman")
+        print("4. Hapus Data Peminjaman")
+        print("5. Keluar Program")
+        print("=========================================")
+
+        input_user = input("Pilih Menu (1-5): ")
+        if input_user == "1":
+            read()
+        elif input_user == "2":
+            create()
+        elif input_user == "3":
+            update()
+        elif input_user == "4":
+            delete()
+        elif input_user == "5":
+            print("\nTerima kasih telah menggunakan sistem peminjaman buku !")
+            break
+        else:
+            print("Input yang Anda masukkan tidak valid !")
+            print("Silahkan masukkan angka 1-5!")
 
 
 if __name__ == "__main__":

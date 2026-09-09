@@ -62,7 +62,7 @@ def main():
             print("\nTerima kasih telah menggunakan sistem peminjaman buku !")
             break
         else:
-            print("Input yang Anda masukkan tidak valid !")
+            print("Input yang Anda masukkantidak valid !")
             print("Silahkan masukkan angka 1-5!")
 
 

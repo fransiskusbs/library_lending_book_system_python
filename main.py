@@ -55,6 +55,9 @@ data_peminjaman = [
 
 # /===== Feature Program =====/
 # Create your feature program here
+# ==========================================
+# READ
+# ==========================================
 def read():
     print("\n==========================================")
     print("        DATA PEMINJAMAN BUKU")
@@ -88,6 +91,9 @@ def read():
     print("-" * 100)
     return
 
+# ==========================================
+# CREATE
+# ==========================================
 def create():
     print("\n==========================================")
     print("          TAMBAH PEMINJAMAN")
@@ -119,10 +125,79 @@ def create():
     print(f"ID Peminjaman : {id_baru}")
     return
 
-def update():
-    """Function for update the data
-    """
-    return
+# ==========================================
+# UPDATE
+# ==========================================
+
+def update_data():
+    print("\n==========================================")
+    print("        UBAH DATA PEMINJAMAN")
+    print("==========================================")
+
+    if len(data_peminjaman) == 0:
+        print("Belum ada data peminjaman.")
+        return
+
+    try:
+        id_cari = int(input("Masukkan ID peminjaman : "))
+    except ValueError:
+        print("ID harus berupa angka.")
+        return
+
+    data_ditemukan = None
+
+    for data in data_peminjaman:
+        if data["id"] == id_cari:
+            data_ditemukan = data
+            break
+
+    if data_ditemukan is None:
+        print("Data dengan ID tersebut tidak ditemukan.")
+        return
+
+    print("\nData saat ini:")
+    print(f"Nama Peminjam   : {data_ditemukan['nama_peminjam']}")
+    print(f"Judul Buku      : {data_ditemukan['judul_buku']}")
+    print(f"Tanggal Pinjam  : {data_ditemukan['tanggal_pinjam']}")
+    print(f"Tanggal Kembali : {data_ditemukan['tanggal_kembali']}")
+    print(f"Status          : {data_ditemukan['status']}")
+
+    print("\nMasukkan data baru:")
+
+    nama_baru = input("Nama peminjam baru   : ")
+    judul_baru = input("Judul buku baru      : ")
+    tanggal_pinjam_baru = input("Tanggal pinjam baru  : ")
+    tanggal_kembali_baru = input("Tanggal kembali baru : ")
+
+    print("\nStatus:")
+    print("1. Dipinjam")
+    print("2. Dikembalikan")
+
+    pilihan_status = input("Pilih status (1/2) : ")
+
+    if pilihan_status == "1":
+        status_baru = "Dipinjam"
+    elif pilihan_status == "2":
+        status_baru = "Dikembalikan"
+    else:
+        print("Pilihan status tidak valid.")
+        return
+
+    konfirmasi = input(
+        "\nApakah kamu yakin ingin mengubah data ini? (y/n) : "
+    ).lower()
+
+    if konfirmasi == "y":
+        data_ditemukan["nama_peminjam"] = nama_baru
+        data_ditemukan["judul_buku"] = judul_baru
+        data_ditemukan["tanggal_pinjam"] = tanggal_pinjam_baru
+        data_ditemukan["tanggal_kembali"] = tanggal_kembali_baru
+        data_ditemukan["status"] = status_baru
+
+        print("Data berhasil diubah.")
+
+    else:
+        print("Perubahan dibatalkan.")
 
 def delete():
     """Function for delete the data

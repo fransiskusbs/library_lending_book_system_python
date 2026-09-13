@@ -199,10 +199,54 @@ def update_data():
     else:
         print("Perubahan dibatalkan.")
 
-def delete():
-    """Function for delete the data
-    """
-    return
+# ==========================================
+# DELETE
+# ==========================================
+
+def delete_data():
+    print("\n==========================================")
+    print("         HAPUS DATA PEMINJAMAN")
+    print("==========================================")
+
+    if len(data_peminjaman) == 0:
+        print("Belum ada data peminjaman.")
+        return
+
+    try:
+        id_cari = int(input("Masukkan ID peminjaman : "))
+    except ValueError:
+        print("ID harus berupa angka.")
+        return
+
+    data_ditemukan = None
+
+    for data in data_peminjaman:
+        if data["id"] == id_cari:
+            data_ditemukan = data
+            break
+
+    if data_ditemukan is None:
+        print("Data dengan ID tersebut tidak ditemukan.")
+        return
+
+    print("\nData yang akan dihapus:")
+    print(f"ID              : {data_ditemukan['id']}")
+    print(f"Nama Peminjam   : {data_ditemukan['nama_peminjam']}")
+    print(f"Judul Buku      : {data_ditemukan['judul_buku']}")
+    print(f"Tanggal Pinjam  : {data_ditemukan['tanggal_pinjam']}")
+    print(f"Tanggal Kembali : {data_ditemukan['tanggal_kembali']}")
+    print(f"Status          : {data_ditemukan['status']}")
+
+    konfirmasi = input(
+        "\nApakah kamu yakin ingin menghapus data ini? (y/n) : "
+    ).lower()
+
+    if konfirmasi == "y":
+        data_peminjaman.remove(data_ditemukan)
+        print("Data berhasil dihapus.")
+
+    else:
+        print("Penghapusan dibatalkan.")
 
 # /===== Main Program =====/
 # Create your main program here

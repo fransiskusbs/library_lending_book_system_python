@@ -15,21 +15,21 @@ data_peminjaman = [
         "nama_peminjam": "Andi",
         "judul_buku": "Laskar Pelangi",
         "tanggal_pinjam": "07-09-2026",
-        "tanggal_kembali": "14-09-2026",
+        "tanggal_kembali": "21-09-2026",
         "status": "Dipinjam"
     },
     {
         "id": 2,
         "nama_peminjam": "Budi",
-        "judul_buku": "Bumi Manusia",
+        "judul_buku": "Learn English Practically",
         "tanggal_pinjam": "05-09-2026",
-        "tanggal_kembali": "12-09-2026",
+        "tanggal_kembali": "20-09-2026",
         "status": "Dipinjam"
     },
     {
         "id": 3,
         "nama_peminjam": "Dewi",
-        "judul_buku": "Negeri 5 Menara",
+        "judul_buku": "Malin kundang",
         "tanggal_pinjam": "01-09-2026",
         "tanggal_kembali": "08-09-2026",
         "status": "Dikembalikan"
@@ -37,59 +37,105 @@ data_peminjaman = [
     {
         "id": 4,
         "nama_peminjam": "Sinta",
-        "judul_buku": " ",
-        "tanggal_pinjam": " ",
-        "tanggal_kembali": " ",
-        "status": " "
+        "judul_buku": "Biografi Pahlawan Nasional: Sutan Syahrir",
+        "tanggal_pinjam": "09-09-2026",
+        "tanggal_kembali": "21-09-2026",
+        "status": "Dipinjam"
     },
     {
         "id": 5,
         "nama_peminjam": "Carol",
-        "judul_buku": " ",
-        "tanggal_pinjam": " ",
-        "tanggal_kembali": " ",
-        "status": " "
+        "judul_buku": "Peristiwa Rengasdengklok",
+        "tanggal_pinjam": "20-08-2026",
+        "tanggal_kembali": "07-09-2026",
+        "status": "Dikembalikan"
     }
 ]
 
-
-# /===== Feature Program =====/
-# Create your feature program here
 # ==========================================
 # READ
 # ==========================================
 def read():
-    print("\n==========================================")
-    print("        DATA PEMINJAMAN BUKU")
-    print("==========================================")
+    while True:
+        print("\n==========================================")
+        print("        DATA PEMINJAMAN BUKU")
+        print("==========================================")
+        print("1. Tampilkan Semua Data")
+        print("2. Search Data")
+        print("3. Kembali")
 
-    if len(data_peminjaman) == 0:
-        print("Belum ada data peminjaman buku.")
-        return
+        input_read = input("Insert your option: ")
 
-    print("-" * 100)
+        if input_read == "1":
+            if len(data_peminjaman) == 0:
+                print("Data peminjaman masih kosong.")
+            else:
+                print("-" * 126)
+                print(
+                    f"{'ID':<5}|"
+                    f"{'Nama Peminjam':<20}|"
+                    f"{'Judul Buku':<50}|"
+                    f"{'Tgl Pinjam':<15}|"
+                    f"{'Tgl Kembali':<15}|"
+                    f"{'Status':<15}|"
+                    )
+                print("-" * 126)
+                
+                for data in data_peminjaman:
+                    print(
+                        f"{data['id']:<5}|"
+                        f"{data['nama_peminjam'].title():<20}|"
+                        f"{data['judul_buku'].title():<50}|"
+                        f"{data['tanggal_pinjam']:<15}|"
+                        f"{data['tanggal_kembali']:<15}|"
+                        f"{data['status'].title():<15}|"
+                        )
+                print("-" * 126)
+
+        elif input_read == "2":
+            search()
+
+        elif input_read == "3":
+            break
+
+        else:
+            print("Input is not valid !")
+
+# ==========================================
+# SEARCH
+# ==========================================
+def search():
+    keyword = input("Masukkan kata kunci : ").lower()
+
+    found = False
+
+    print("-"*126)
     print(
-        f"{'ID':<5}"
-        f"{'Nama Peminjam':<20}"
-        f"{'Judul Buku':<25}"
-        f"{'Tgl Pinjam':<15}"
-        f"{'Tgl Kembali':<15}"
-        f"{'Status':<15}"
-    )
-    print("-" * 100)
-
-    for data in data_peminjaman:
-        print(
-            f"{data['id']:<5}"
-            f"{data['nama_peminjam']:<20}"
-            f"{data['judul_buku']:<25}"
-            f"{data['tanggal_pinjam']:<15}"
-            f"{data['tanggal_kembali']:<15}"
-            f"{data['status']:<15}"
+        f"{'ID':<5}|"
+        f"{'Nama Peminjam':<20}|"
+        f"{'Judul Buku':<50}|"
+        f"{'Tgl Pinjam':<15}|"
+        f"{'Tgl Kembali':<15}|"
+        f"{'Status':<15}|"
         )
+    print("-" * 126)
+    for data in data_peminjaman:
+        if (keyword in data["nama_peminjam"].lower()
+                or keyword in data["judul_buku"].lower()
+                or keyword in data["status"].lower()):
+            found = True
+            print(
+                f"{data['id']:<5}|"
+                f"{data['nama_peminjam'].title():<20}|"
+                f"{data['judul_buku'].title():<50}|"
+                f"{data['tanggal_pinjam']:<15}|"
+                f"{data['tanggal_kembali']:<15}|"
+                f"{data['status'].title():<15}|"
+                )
+            print("-" * 126)
 
-    print("-" * 100)
-    return
+    if found == False:
+        print("Data tidak ditemukan")
 
 # ==========================================
 # CREATE
@@ -128,7 +174,6 @@ def create():
 # ==========================================
 # UPDATE
 # ==========================================
-
 def update_data():
     print("\n==========================================")
     print("        UBAH DATA PEMINJAMAN")
@@ -202,7 +247,6 @@ def update_data():
 # ==========================================
 # DELETE
 # ==========================================
-
 def delete_data():
     print("\n==========================================")
     print("         HAPUS DATA PEMINJAMAN")

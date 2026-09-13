@@ -157,24 +157,26 @@ def create():
     else:
         id_baru = data_peminjaman[-1]["id"] + 1
 
-    konfirmasi = input("Anda yakin untuk menyimpan data ini? (y/n) : ").lower()
+    while True:
+        konfirmasi = input("Anda yakin untuk menyimpan data ini? (y/n) : ").lower()
 
-    if konfirmasi == "y":
-        data_baru = {
-                "id": id_baru,
-                "nama_peminjam": nama_peminjam,
-                "judul_buku": judul_buku,
-                "tanggal_pinjam": tanggal_pinjam,
-                "tanggal_kembali": tanggal_kembali,
-                "status": "Dipinjam"}
-        data_peminjaman.append(data_baru)
-        print("\nData peminjaman berhasil ditambahkan.")
-        print(f"ID Peminjaman : {id_baru}")
-        return
-    elif konfirmasi == "n":
-        print("Data batal ditambahkan !")
-    else:
-        print("Input yang Anda masukkan tidak valid !")
+        if konfirmasi == "y":
+            data_baru = {
+                    "id": id_baru,
+                    "nama_peminjam": nama_peminjam,
+                    "judul_buku": judul_buku,
+                    "tanggal_pinjam": tanggal_pinjam,
+                    "tanggal_kembali": tanggal_kembali,
+                    "status": "Dipinjam"}
+            data_peminjaman.append(data_baru)
+            print("\nData peminjaman berhasil ditambahkan.")
+            print(f"ID Peminjaman : {id_baru}")
+            return
+        elif konfirmasi == "n":
+            print("Data batal ditambahkan !")
+            break
+        else:
+            print("Input yang Anda masukkan tidak valid (y atau n)!")
 
 # ==========================================
 # UPDATE
@@ -189,7 +191,7 @@ def update():
         return
 
     try:
-        id_cari = int(input("Masukkan ID peminjaman : "))
+        input_update = int(input("Masukkan ID peminjaman : "))
     except ValueError:
         print("ID harus berupa angka.")
         return
@@ -197,7 +199,7 @@ def update():
     data_ditemukan = None
 
     for data in data_peminjaman:
-        if data["id"] == id_cari:
+        if data["id"] == input_update:
             data_ditemukan = data
             break
 

@@ -235,22 +235,24 @@ def update():
         print("Pilihan status tidak valid.")
         return
 
-    konfirmasi = input(
-        "\nApakah kamu yakin ingin mengubah data ini? (y/n) : "
-    ).lower()
+    while True:
+        konfirmasi = input(
+            "\nApakah kamu yakin ingin mengubah data ini? (y/n) : ").lower()
 
-    if konfirmasi == "y":
-        data_ditemukan["nama_peminjam"] = nama_baru
-        data_ditemukan["judul_buku"] = judul_baru
-        data_ditemukan["tanggal_pinjam"] = tanggal_pinjam_baru
-        data_ditemukan["tanggal_kembali"] = tanggal_kembali_baru
-        data_ditemukan["status"] = status_baru
+        if konfirmasi == "y":
+            data_ditemukan["nama_peminjam"] = nama_baru
+            data_ditemukan["judul_buku"] = judul_baru
+            data_ditemukan["tanggal_pinjam"] = tanggal_pinjam_baru
+            data_ditemukan["tanggal_kembali"] = tanggal_kembali_baru
+            data_ditemukan["status"] = status_baru
 
-        print("Data berhasil diubah.")
-    elif konfirmasi == "n":
-        print("Data batal diubah !")
-    else:
-        print("Input yang Anda masukkan tidak valid !")
+            print("Data berhasil diubah.")
+            break
+        elif konfirmasi == "n":
+            print("Data batal diubah !")
+            break
+        else:
+            print("Input yang Anda masukkan tidak valid !")
 
 # ==========================================
 # DELETE

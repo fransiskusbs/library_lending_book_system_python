@@ -61,7 +61,7 @@ def read():
         print("        DATA PEMINJAMAN BUKU")
         print("==========================================")
         print("1. Tampilkan Semua Data")
-        print("2. Search Data")
+        print("2. Cari Data")
         print("3. Kembali")
 
         input_read = input("Masukkan pilihan menu: ")
@@ -252,7 +252,7 @@ def update():
             print("Data batal diubah !")
             break
         else:
-            print("Input yang Anda masukkan tidak valid !")
+            print("Input yang Anda masukkan tidak valid (y atau n)!")
 
 # ==========================================
 # DELETE
@@ -291,16 +291,19 @@ def delete():
     print(f"Tanggal Kembali : {data_ditemukan['tanggal_kembali']}")
     print(f"Status          : {data_ditemukan['status']}")
 
-    konfirmasi = input(
-        "\nApakah kamu yakin ingin menghapus data ini? (y/n) : "
-    ).lower()
+    while True:
+        konfirmasi = input(
+            "\nApakah kamu yakin ingin menghapus data ini? (y/n) : ").lower()
 
-    if konfirmasi == "y":
-        data_peminjaman.remove(data_ditemukan)
-        print("Data berhasil dihapus.")
-
-    else:
-        print("Penghapusan dibatalkan.")
+        if konfirmasi == "y":
+            data_peminjaman.remove(data_ditemukan)
+            print("Data berhasil dihapus.")
+            break
+        elif konfirmasi == "n":
+            print("Data batal dihapus !")
+            break
+        else:
+            print("Input yang Anda masukkan tidak valid (y atau n)!")
 
 # /===== Main Program =====/
 # Create your main program here

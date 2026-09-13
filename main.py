@@ -64,7 +64,7 @@ def read():
         print("2. Search Data")
         print("3. Kembali")
 
-        input_read = input("Insert your option: ")
+        input_read = input("Masukkan pilihan menu: ")
 
         if input_read == "1":
             if len(data_peminjaman) == 0:
@@ -99,7 +99,8 @@ def read():
             break
 
         else:
-            print("Input is not valid !")
+            print("Input yang Anda masukkan tidak valid !")
+            print("Masukkan angka 1-3 !")
 
 # ==========================================
 # SEARCH
@@ -156,25 +157,29 @@ def create():
     else:
         id_baru = data_peminjaman[-1]["id"] + 1
 
-    data_baru = {
-        "id": id_baru,
-        "nama_peminjam": nama_peminjam,
-        "judul_buku": judul_buku,
-        "tanggal_pinjam": tanggal_pinjam,
-        "tanggal_kembali": tanggal_kembali,
-        "status": "Dipinjam"
-    }
+    konfirmasi = input("Anda yakin untuk menyimpan data ini? (y/n) : ").lower()
 
-    data_peminjaman.append(data_baru)
-
-    print("\nData peminjaman berhasil ditambahkan.")
-    print(f"ID Peminjaman : {id_baru}")
-    return
+    if konfirmasi == "y":
+        data_baru = {
+                "id": id_baru,
+                "nama_peminjam": nama_peminjam,
+                "judul_buku": judul_buku,
+                "tanggal_pinjam": tanggal_pinjam,
+                "tanggal_kembali": tanggal_kembali,
+                "status": "Dipinjam"}
+        data_peminjaman.append(data_baru)
+        print("\nData peminjaman berhasil ditambahkan.")
+        print(f"ID Peminjaman : {id_baru}")
+        return
+    elif konfirmasi == "n":
+        print("Data batal ditambahkan !")
+    else:
+        print("Input yang Anda masukkan tidak valid !")
 
 # ==========================================
 # UPDATE
 # ==========================================
-def update_data():
+def update():
     print("\n==========================================")
     print("        UBAH DATA PEMINJAMAN")
     print("==========================================")
@@ -247,7 +252,7 @@ def update_data():
 # ==========================================
 # DELETE
 # ==========================================
-def delete_data():
+def delete():
     print("\n==========================================")
     print("         HAPUS DATA PEMINJAMAN")
     print("==========================================")
@@ -320,7 +325,7 @@ def main():
             print("\nTerima kasih telah menggunakan sistem peminjaman buku !")
             break
         else:
-            print("Input yang Anda masukkantidak valid !")
+            print("Input yang Anda masukkan tidak valid !")
             print("Silahkan masukkan angka 1-5!")
 
 

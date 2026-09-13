@@ -245,9 +245,10 @@ def update():
         data_ditemukan["status"] = status_baru
 
         print("Data berhasil diubah.")
-
+    elif konfirmasi == "n":
+        print("Data batal diubah !")
     else:
-        print("Perubahan dibatalkan.")
+        print("Input yang Anda masukkan tidak valid !")
 
 # ==========================================
 # DELETE

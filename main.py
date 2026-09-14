@@ -141,7 +141,7 @@ def search():
 
 def create():
     print("\n==========================================")
-    print("          TAMBAH PEMINJAMAN")
+    print("       TAMBAH DATA PEMINJAMAN BUKU")
     print("==========================================")
 
     nama_peminjam = input("Nama peminjam     : ")
@@ -180,7 +180,7 @@ def create():
 
 def update():
     print("\n==========================================")
-    print("        UBAH DATA PEMINJAMAN")
+    print("       UBAH DATA PEMINJAMAN BUKU")
     print("==========================================")
 
     if len(data_peminjaman) == 0:
@@ -255,7 +255,7 @@ def update():
 
 def delete():
     print("\n==========================================")
-    print("         HAPUS DATA PEMINJAMAN")
+    print("        HAPUS DATA PEMINJAMAN BUKU")
     print("==========================================")
 
     if len(data_peminjaman) == 0:

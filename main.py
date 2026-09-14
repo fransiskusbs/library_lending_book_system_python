@@ -1,5 +1,5 @@
 # ===================================
-# [LIBRARY LENDING BOOK SYSTEM]
+# [SISTEM PEMINJAMAN BUKU PERPUSTAKAAN]
 # ===================================
 # Developed by. Fransiskus B S
 # JCDS - 34
@@ -52,9 +52,9 @@ data_peminjaman = [
     }
 ]
 
-# ==========================================
+
 # READ
-# ==========================================
+
 def read():
     while True:
         print("\n==========================================")
@@ -102,9 +102,8 @@ def read():
             print("Input yang Anda masukkan tidak valid !")
             print("Masukkan angka 1-3 !")
 
-# ==========================================
 # SEARCH
-# ==========================================
+
 def search():
     keyword = input("Masukkan kata kunci : ").lower()
 
@@ -138,9 +137,8 @@ def search():
     if found == False:
         print("Data tidak ditemukan")
 
-# ==========================================
 # CREATE
-# ==========================================
+
 def create():
     print("\n==========================================")
     print("          TAMBAH PEMINJAMAN")
@@ -178,9 +176,8 @@ def create():
         else:
             print("Input yang Anda masukkan tidak valid (y atau n)!")
 
-# ==========================================
 # UPDATE
-# ==========================================
+
 def update():
     print("\n==========================================")
     print("        UBAH DATA PEMINJAMAN")
@@ -254,9 +251,8 @@ def update():
         else:
             print("Input yang Anda masukkan tidak valid (y atau n)!")
 
-# ==========================================
 # DELETE
-# ==========================================
+
 def delete():
     print("\n==========================================")
     print("         HAPUS DATA PEMINJAMAN")

@@ -117,6 +117,28 @@ def read():
             print("Input yang Anda masukkan tidak valid !")
             print("Masukkan angka 1-3 !")
 
+# READ BUKU
+def read_buku():
+    print("\n==========================================")
+    print("           DAFTAR BUKU & STOCK")
+    print("==========================================")
+
+    print("-" * 62)
+    print(
+        f"{'ID Buku':<8}|"
+        f"{'Judul Buku':<45}|"
+        f"{'Stock':<6}|"
+    )
+    print("-" * 62)
+
+    for buku in data_buku:
+        print(
+            f"{buku['id_buku']:<8}|"
+            f"{buku['judul_buku']:<45}|"
+            f"{buku['stock']:<6}|"
+        )
+    print("-" * 62)
+
 # SEARCH
 
 def search():
@@ -673,27 +695,30 @@ def main():
         print("   SISTEM PEMINJAMAN BUKU PERPUSTAKAAN")
         print("=========================================")
         print("1. Tampilkan Data Peminjaman Buku")
-        print("2. Tambah Data Peminjaman Buku")
-        print("3. Ubah Data Peminjaman Buku")
-        print("4. Hapus Data Peminjaman Buku")
-        print("5. Keluar")
+        print("2. Tampilkan Daftar Buku")
+        print("3. Tambah Data Peminjaman Buku")
+        print("4. Ubah Data Peminjaman Buku")
+        print("5. Hapus Data Peminjaman Buku")
+        print("6. Keluar")
         print("=========================================")
 
         input_user = input("Pilih Menu (1-5): ")
         if input_user == "1":
             read()
-        elif input_user == "2":
-            create()
+        if input_user == "2":
+            read_buku()
         elif input_user == "3":
-            update()
+            create()
         elif input_user == "4":
-            delete()
+            update()
         elif input_user == "5":
+            delete()
+        elif input_user == "6":
             print("\nTerima kasih telah menggunakan sistem peminjaman buku !")
             break
         else:
             print("Input yang Anda masukkan tidak valid !")
-            print("Silahkan masukkan angka 1-5!")
+            print("Silahkan masukkan angka 1-6!")
 
 
 if __name__ == "__main__":

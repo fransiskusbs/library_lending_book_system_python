@@ -40,12 +40,6 @@ This application is designed for school librarian to facilitate their daily acti
     * Allow for the removal of unwanted book borrowing records with appropriate authorization checks.
     * Validate the entered ID before deleting data
     * Provide confirmation before removing a book borrowing record.
-* **Security:**
-    * Implement user authentication and authorization mechanisms (if sensitive data is involved) to control access to different CRUD operations.
-    * ... (Specify additional security features as needed)
-* **Reporting:**
-    * Generate reports or summaries based on [Data Entity] data to support [Business Functions] (optional).
-    * Export data in various formats (e.g., CSV, Excel) for further analysis (optional).
 
 ## Installation
 

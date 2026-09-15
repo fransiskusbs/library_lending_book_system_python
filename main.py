@@ -607,22 +607,29 @@ def delete():
             )
     print("-" * 126)
 
-    try:
-        id_cari = int(input("Masukkan ID peminjaman : "))
-    except ValueError:
-        print("ID harus berupa angka.")
-        return
+    while True:
+        try:
+            id_cari = int(input("Masukkan ID peminjaman : "))
+        except ValueError:
+            print("ID harus berupa angka.")
+            continue
 
-    data_ditemukan = None
+        data_ditemukan = None
 
-    for data in data_peminjaman:
-        if data["id_peminjaman"] == id_cari:
-            data_ditemukan = data
-            break
+        for data in data_peminjaman:
+            if data["id_peminjaman"] == id_cari:
+                data_ditemukan = data
+                break
 
-    if data_ditemukan is None:
-        print("Data dengan ID tersebut tidak ditemukan.")
-        return
+        if data_ditemukan is None:
+            print("Data dengan ID tersebut tidak ditemukan.")
+            continue
+    
+        elif data_ditemukan["status"] != "Dikembalikan":
+            print("Data tidak dapat dihapus karena buku masih dipinjam.")
+            continue
+        break
+            
 
     print("\nData yang akan dihapus:")
     print(f"ID              : {data_ditemukan['id_peminjaman']}")

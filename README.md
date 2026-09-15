@@ -50,13 +50,9 @@ This application is designed for school librarian to facilitate their daily acti
 2. **Installation:**
    Clone this repository and open the project directory:
     ```bash
-    git clone https://github.com/<your-username>/<your-repo-name>.git
-    cd <your-repo-name>
-    pip install -r requirements.txt  # If using a requirements.txt file
+    git clone https://github.com/fransiskusbs/library_lending_book_system_python.git
+    cd library_lending_book_system_python
     ```
-
-4. **Database Setup (if applicable):**
-    Follow specific instructions for configuring your database connection, aligning with the business's chosen database management system.
 
 ## Usage
 
@@ -66,17 +62,21 @@ This application is designed for school librarian to facilitate their daily acti
     ```
 
 2. **CRUD Operations:**
-    * **Create:** Add a new [Data Entity] record, for example, a new customer in a customer management system, providing details like name, contact information, and preferences.
-    * **Read:** Search and retrieve customer information by name, ID, or other relevant criteria.
-    * **Update:** Modify customer details, such as updating their address or contact details.
-    * **Delete:** Remove a customer record from the system (with appropriate authorization, if applicable).
+   After running the application, the librarian can select the available menu options :
+    * **Create:** Add a new book borrowing record by entering the required borrower and book information. The librarian must confirm the data before it is saved.
+    * **Read:** Search and retrieve borrower information by specific records using a keyword like name, book title, or status.
+    * **Update:** Modify borrower details by using its ID, such as updating their name, book title, or status and confirm the changes before they are applied.
+    * **Delete:** Remove a borrower record from the system using its ID and confirm the deletion before the record is removed.
 
 ## Data Model
-This project utilizes a [Data Structure] (e.g., relational database, JSON documents) to represent [Data Entity] data. The following fields are typically stored:
-   * [Field 1]: (Data type) - Description of the field's purpose in the business context.
-   * [Field 2]: (Data type) - Description of the field's purpose in the business context.
-   * ... (List all relevant fields)
+This project utilizes a Python list of dictionaries to represent book borrowing records data. The following fields are typically stored:
+   * [ID]: (Integer) - A unique identifier for each book borrowing record.
+   * [Borrower Name]: (String) - The name of the student who borrows the book.
+   * [Book Title]: (String) - The title of the borrowed book.
+   * [Borrowed Date]: (String) - The date when the book was borrowed.
+   * [Return Date]: (String) - The expected or actual return date of the book.
+   * [Status]: (String) - The current status of the loan, such as "Dipinjam" or "Dikembalikan".
 
 ## Contributing
-We welcome contributions to this project! Please feel free to open a pull request, sent to [your_email] or submit an issue if you encounter any problems or have suggestions for improvements.
+We welcome contributions to this project! Please feel free to open a pull request, sent to fransiskusjorang@gmail.com or submit an issue if you encounter any problems or have suggestions for improvements.
 

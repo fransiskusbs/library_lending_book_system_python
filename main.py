@@ -9,9 +9,22 @@
 
 # /===== Data Model =====/
 # Create your data model here
+data_buku = [
+    {"id_buku" : 1, "judul_buku" : "Laskar Pelangi", "stock" : 2},
+    {"id_buku" : 2, "judul_buku" : "Learn English Practically", "stock" : 1},
+    {"id_buku" : 3, "judul_buku" : "Malin Kundang", "stock" : 1},
+    {"id_buku" : 4, "judul_buku" : "Biografi Pahlawan Nasional: Sutan Syahrir", "stock" : 3},
+    {"id_buku" : 5, "judul_buku" : "Peristiwa Rengasdengklok", "stock" : 2},
+    {"id_buku" : 6, "judul_buku" : "Kamus Besar Bahasa Indonesia", "stock" : 1},
+    {"id_buku" : 7, "judul_buku" : "Kamus Inggris-Indonesia", "stock" : 1},
+    {"id_buku" : 8, "judul_buku" : "Kamus Indonesia-Inggris", "stock" : 2},
+    {"id_buku" : 9, "judul_buku" : "R.A Kartini", "stock" : 2},
+    {"id_buku" : 10, "judul_buku" : "Atlas Indonesia dan Dunia", "stock" : 1},
+    ]
+
 data_peminjaman = [
     {
-        "id": 1,
+        "id_peminjaman": 1,
         "nama_peminjam": "Andi",
         "judul_buku": "Laskar Pelangi",
         "tanggal_pinjam": "07-09-2026",
@@ -19,7 +32,7 @@ data_peminjaman = [
         "status": "Dipinjam"
     },
     {
-        "id": 2,
+        "id_peminjaman": 2,
         "nama_peminjam": "Budi",
         "judul_buku": "Learn English Practically",
         "tanggal_pinjam": "05-09-2026",
@@ -27,7 +40,7 @@ data_peminjaman = [
         "status": "Dipinjam"
     },
     {
-        "id": 3,
+        "id_peminjaman": 3,
         "nama_peminjam": "Dewi",
         "judul_buku": "Malin kundang",
         "tanggal_pinjam": "01-09-2026",
@@ -35,7 +48,7 @@ data_peminjaman = [
         "status": "Dikembalikan"
     },
     {
-        "id": 4,
+        "id_peminjaman": 4,
         "nama_peminjam": "Sinta",
         "judul_buku": "Biografi Pahlawan Nasional: Sutan Syahrir",
         "tanggal_pinjam": "09-09-2026",
@@ -43,7 +56,7 @@ data_peminjaman = [
         "status": "Dipinjam"
     },
     {
-        "id": 5,
+        "id_peminjaman": 5,
         "nama_peminjam": "Carol",
         "judul_buku": "Peristiwa Rengasdengklok",
         "tanggal_pinjam": "20-08-2026",
@@ -83,7 +96,7 @@ def read():
                 
                 for data in data_peminjaman:
                     print(
-                        f"{data['id']:<5}|"
+                        f"{data['id_peminjaman']:<5}|"
                         f"{data['nama_peminjam'].title():<20}|"
                         f"{data['judul_buku'].title():<50}|"
                         f"{data['tanggal_pinjam']:<15}|"
@@ -125,7 +138,7 @@ def search():
                 or keyword in data["status"].lower()):
             cari = True
             print(
-                f"{data['id']:<5}|"
+                f"{data['id_peminjaman']:<5}|"
                 f"{data['nama_peminjam'].title():<20}|"
                 f"{data['judul_buku'].title():<50}|"
                 f"{data['tanggal_pinjam']:<15}|"
@@ -153,14 +166,14 @@ def create():
     if len(data_peminjaman) == 0:
         id_baru = 1
     else:
-        id_baru = data_peminjaman[-1]["id"] + 1
+        id_baru = data_peminjaman[-1]["id_peminjaman"] + 1
 
     while True:
         konfirmasi = input("Anda yakin untuk menyimpan data ini? (y/n) : ").lower()
 
         if konfirmasi == "y":
             data_baru = {
-                    "id": id_baru,
+                    "id_peminjaman": id_baru,
                     "nama_peminjam": nama_peminjam,
                     "judul_buku": judul_buku,
                     "tanggal_pinjam": tanggal_pinjam,
@@ -199,7 +212,7 @@ def update():
     data_ditemukan = None
 
     for data in data_peminjaman:
-        if data["id"] == input_update:
+        if data["id_peminjaman"] == input_update:
             data_ditemukan = data
             break
 
@@ -274,7 +287,7 @@ def delete():
     data_ditemukan = None
 
     for data in data_peminjaman:
-        if data["id"] == id_cari:
+        if data["id_peminjaman"] == id_cari:
             data_ditemukan = data
             break
 
@@ -283,7 +296,7 @@ def delete():
         return
 
     print("\nData yang akan dihapus:")
-    print(f"ID              : {data_ditemukan['id']}")
+    print(f"ID              : {data_ditemukan['id_peminjaman']}")
     print(f"Nama Peminjam   : {data_ditemukan['nama_peminjam']}")
     print(f"Judul Buku      : {data_ditemukan['judul_buku']}")
     print(f"Tanggal Pinjam  : {data_ditemukan['tanggal_pinjam']}")

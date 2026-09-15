@@ -1,38 +1,45 @@
-# Python CRUD Application for [Business Domain]
+# Python CRUD Application for Library Lending Book System
 
-A comprehensive Python application for managing [Data Entity] data with Create, Read, Update, and Delete (CRUD) operations.
+A comprehensive Python application for managing library book loan data with Create, Read, Update, and Delete (CRUD) operations. This application is designed to help librarians manage book borrowing records efficiently and systematically.
 
 ## Business Understanding
 
-This project caters to the [Industry/Business Domain] industry, specifically addressing the need to manage [Data Entity] data efficiently. [Data Entity] plays a crucial role in [Explain the importance of data entity in business processes].
+This project caters to the school library industry, specifically to support librarians in managing book borrowing and returning data efficiently. A book loan management system plays a crucial role to record information about borrowers, books, borrowing dates, return dates, and loan status. By using this application, the process of recording and managing borrowing data can be performed more efficiently compared to manual record-keeping.
 
 **Benefits:**
 
-* Improved data accuracy and consistency
-* Streamlined data management processes
-* Enhanced decision-making through readily available data
-* ... (List additional benefits relevant to the business)
+* Improved data accuracy and consistency of book loan records
+* Streamlined book borrowing and returning data management
+* Reduced errors in recording borrower and book information
+* Easier searching and monitoring of borrowing records
+* Faster access to information about currently borrowed and returned books
+* Improved efficiency of librarians in managing daily library activities
 
 **Target Users:**
 
-This application is designed for [Target Users] (e.g., sales representatives, inventory managers, customer support agents) within the organization to facilitate their [Tasks/Activities] related to [Data Entity].
+This application is designed for school librarian to facilitate their daily activities related to managing book borrowing records, including adding, viewing, searching, updating, and deleting loan data.
 
 ## Features
 
 * **Create:**
-    * Add new [Data Entity] entries with essential details like [List relevant fields].
-    * Implement validation rules to ensure data integrity (if applicable, e.g., unique identifiers, data type checks).
+    * Add new book loan records with essential information such as borrower name, book title, borrowing date, return date, and loan status.
+    * Automatically generate a unique ID for each borrowing record.
+    * Validate user input to maintain data integrity.
+    * Provide a confirmation step before saving new loan data.
 * **Read:**
-    * Search and retrieve specific [Data Entity] records by applying filters based on [Searchable fields].
-    * Display comprehensive information for each [Data Entity] in a user-friendly format.
-    * Integrate pagination and sorting capabilities for large datasets (if applicable).
+    * Search and retrieve specific book borrowing records by applying filters based on book title, name of borrower, and status.
+    * Display all borrowing information in a structured table.
+    * Display comprehensive information for each book borrowing information in a user-friendly format.
+    * Show information such as ID, borrower name, book title, borrowing date, return date, and loan status.
+    * Display the available book list and stock information.
 * **Update:**
-    * Modify existing [Data Entity] data to reflect changes in [Attributes/Properties].
+    * Modify existing book borrowing data to reflect changes in borrower name, book title, borrowing date, return date, and loan status.
+    * Validate user input before updating data
     * Provide clear confirmation or error messages based on update success or failure.
 * **Delete:**
-    * Allow for the removal of unwanted [Data Entity] records with appropriate authorization checks (if applicable).
-    * Implement soft delete functionality to prevent permanent data loss (optional, depending on business needs).
-    * Consider offering data archiving capabilities (optional).
+    * Allow for the removal of unwanted book borrowing records with appropriate authorization checks.
+    * Validate the entered ID before deleting data
+    * Provide confirmation before removing a book borrowing record.
 * **Security:**
     * Implement user authentication and authorization mechanisms (if sensitive data is involved) to control access to different CRUD operations.
     * ... (Specify additional security features as needed)

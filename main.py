@@ -598,6 +598,28 @@ def delete():
         print("Belum ada data peminjaman.")
         return
 
+    print("-" * 126)
+    print(
+        f"{'ID':<5}|"
+        f"{'Nama Peminjam':<20}|"
+        f"{'Judul Buku':<50}|"
+        f"{'Tgl Pinjam':<15}|"
+        f"{'Tgl Kembali':<15}|"
+        f"{'Status':<15}|"
+        )
+    print("-" * 126)
+    
+    for data in data_peminjaman:
+        print(
+            f"{data['id_peminjaman']:<5}|"
+            f"{data['nama_peminjam'].title():<20}|"
+            f"{data['judul_buku'].title():<50}|"
+            f"{data['tanggal_pinjam']:<15}|"
+            f"{data['tanggal_kembali']:<15}|"
+            f"{data['status'].title():<15}|"
+            )
+    print("-" * 126)
+
     try:
         id_cari = int(input("Masukkan ID peminjaman : "))
     except ValueError:
@@ -629,6 +651,11 @@ def delete():
 
         if konfirmasi == "y":
             data_peminjaman.remove(data_ditemukan)
+
+            # Mengurutkan kembali ID mulai dari 1
+            for i, data in enumerate(data_peminjaman, start=1):
+                data["id_peminjaman"] = i
+
             print("Data berhasil dihapus.")
             break
         elif konfirmasi == "n":

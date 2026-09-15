@@ -187,11 +187,14 @@ def update():
         print("Belum ada data peminjaman.")
         return
 
-    try:
-        input_update = int(input("Masukkan ID peminjaman : "))
-    except ValueError:
-        print("ID harus berupa angka.")
-        return
+    while True:
+        input_update = input("Masukkan ID peminjaman : ")
+
+        if  input_update.isdigit():
+            input_update = int(input_update)
+            break
+        else:
+            print("ID harus berupa angka.")
 
     data_ditemukan = None
 

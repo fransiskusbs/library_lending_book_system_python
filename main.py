@@ -107,7 +107,7 @@ def read():
 def search():
     keyword = input("Masukkan kata kunci : ").lower()
 
-    found = False
+    cari = False
 
     print("-"*126)
     print(
@@ -123,7 +123,7 @@ def search():
         if (keyword in data["nama_peminjam"].lower()
                 or keyword in data["judul_buku"].lower()
                 or keyword in data["status"].lower()):
-            found = True
+            cari = True
             print(
                 f"{data['id']:<5}|"
                 f"{data['nama_peminjam'].title():<20}|"
@@ -134,7 +134,7 @@ def search():
                 )
             print("-" * 126)
 
-    if found == False:
+    if cari == False:
         print("Data tidak ditemukan")
 
 # CREATE

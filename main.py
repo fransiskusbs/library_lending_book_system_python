@@ -7,7 +7,7 @@
 
 # /************************************/
 
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 
 # /===== Data Model =====/
 # Create your data model here
@@ -391,6 +391,9 @@ def update():
         print("Data dengan ID tersebut tidak ditemukan.")
         return
 
+    judul_lama = data_ditemukan["judul_buku"]
+    status_lama = data_ditemukan["status"]
+
     print("\nData saat ini:")
     print(f"Nama Peminjam   : {data_ditemukan['nama_peminjam']}")
     print(f"Judul Buku      : {data_ditemukan['judul_buku']}")
@@ -401,9 +404,64 @@ def update():
     print("\nMasukkan data baru:")
 
     nama_baru = input("Nama peminjam baru   : ")
-    judul_baru = input("Judul buku baru      : ")
-    tanggal_pinjam_baru = input("Tanggal pinjam baru  : ")
-    tanggal_kembali_baru = input("Tanggal kembali baru : ")
+
+    print("\n============================DAFTAR BUKU============================")
+    
+    for buku in data_buku:
+        print(
+            f"{buku["id_buku"]:<5}|"
+            f"{buku["judul_buku"]:<50}|"
+            f"Stock : {buku["stock"]}"
+        )
+    print("-"*67)
+
+    while True:
+        input_judul_baru = input("Judul buku baru (berdasarkan ID buku): ")
+
+        if input_judul_baru.strip() == "":
+            judul_baru = data_ditemukan["judul_buku"]
+            buku_baru = None
+            break
+
+        if input_judul_baru.isdigit():
+            id_buku_baru = int(input_judul_baru)
+        else:
+            print("ID buku harus berupa angka !")
+            continue
+
+        buku_baru = None
+
+        for buku in data_buku:
+            if buku["id_buku"] == id_buku_baru:
+                buku_baru = buku
+                break
+
+        if buku_baru is None:
+            print("ID buku tidak ditemukan !")
+            continue
+
+        if buku_baru["judul_buku"] == judul_lama:
+            judul_baru = judul_lama
+            break
+
+        if buku_baru["stock"] <= 0:
+            print("Stock buku sedang habis !")
+            continue
+
+        judul_baru = buku_baru["judul_buku"]
+        break
+
+    tanggal_pinjam_baru = input_tanggal("Tanggal pinjam baru (DDMMYYYY) : ", data_ditemukan["tanggal_pinjam"])
+
+    tanggal_obj = datetime.strptime(tanggal_pinjam_baru, "%d-%m-%Y")
+    tanggal_kembali_obj = tanggal_obj + timedelta(days=7)
+    tanggal_kembali_baru = tanggal_kembali_obj.strftime("%d-%m-%Y")
+
+    if nama_baru.strip() == "":
+        nama_baru = data_ditemukan["nama_peminjam"]
+
+    if judul_baru.strip() == "":
+        judul_baru = data_ditemukan["judul_buku"]
 
     print("\nStatus:")
     print("1. Dipinjam")
@@ -411,7 +469,9 @@ def update():
 
     pilihan_status = input("Pilih status (1/2) : ")
 
-    if pilihan_status == "1":
+    if pilihan_status == "":
+        status_baru = data_ditemukan["status"]
+    elif pilihan_status == "1":
         status_baru = "Dipinjam"
     elif pilihan_status == "2":
         status_baru = "Dikembalikan"
@@ -419,11 +479,29 @@ def update():
         print("Pilihan status tidak valid.")
         return
 
+    print(f"Nama Peminjam : {nama_baru}")
+    print(f"Judul Buku : {judul_baru}")
+    print(f"Tanggal Pinjam    : {tanggal_pinjam_baru}")
+    print(f"Tanggal Kembali   : {tanggal_kembali_baru}")
+
+
     while True:
         konfirmasi = input(
             "\nApakah kamu yakin ingin mengubah data ini? (y/n) : ").lower()
 
         if konfirmasi == "y":
+
+            # Jika buku berubah
+            if judul_baru != judul_lama:
+
+                # Mengembalikan stock buku lama
+                for buku in data_buku:
+                    if buku["judul_buku"] == judul_lama:
+                        buku["stock"] += 1
+                        break
+            # Mengurangi stock buku baru
+            buku_baru["stock"] -=1
+
             data_ditemukan["nama_peminjam"] = nama_baru
             data_ditemukan["judul_buku"] = judul_baru
             data_ditemukan["tanggal_pinjam"] = tanggal_pinjam_baru
@@ -437,6 +515,38 @@ def update():
             break
         else:
             print("Input yang Anda masukkan tidak valid (y atau n)!")
+
+
+# INPUT TANGGAL
+
+def input_tanggal(pesan, tanggal_lama):
+    while True:
+        tanggal = input(pesan)
+
+        # Kalau kosong atau hanya spasi, gunakan tanggal lama
+        if tanggal.strip() == "":
+            return tanggal_lama
+
+        # Harus terdiri dari 8 angka
+        if not tanggal.isdigit() or len(tanggal) != 8:
+            print("Format tanggal harus DDMMYYYY. Contoh: 15092026")
+            continue
+
+        try:
+            tanggal_obj = datetime.strptime(tanggal, "%d%m%Y")
+
+            if tanggal_obj.year != 2026:
+                print("Tahun harus 2026.")
+                continue
+
+            # Tanggal tidak boleh sebelum hari ini
+            if tanggal_obj.date() < datetime.today().date():
+                print("Tanggal pinjam yang anda masukkan tidak boleh sebelum hari ini !")
+                continue
+            return tanggal_obj.strftime("%d-%m-%Y")
+
+        except ValueError:
+            print("Tanggal yang dimasukkan tidak valid.")
 
 # DELETE
 

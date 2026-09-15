@@ -48,13 +48,14 @@ This application is designed for school librarian to facilitate their daily acti
     * Additional dependencies (list any required packages)
 
 2. **Installation:**
+   Clone this repository and open the project directory:
     ```bash
     git clone https://github.com/<your-username>/<your-repo-name>.git
     cd <your-repo-name>
     pip install -r requirements.txt  # If using a requirements.txt file
     ```
 
-3. **Database Setup (if applicable):**
+4. **Database Setup (if applicable):**
     Follow specific instructions for configuring your database connection, aligning with the business's chosen database management system.
 
 ## Usage

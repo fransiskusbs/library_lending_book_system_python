@@ -404,16 +404,19 @@ def update():
     print("\nMasukkan data baru:")
 
     nama_baru = input("Nama peminjam baru   : ")
+    nama_diubah = nama_baru.strip() != ""
 
     print("\n============================DAFTAR BUKU============================")
     
     for buku in data_buku:
         print(
-            f"{buku["id_buku"]:<5}|"
-            f"{buku["judul_buku"]:<50}|"
-            f"Stock : {buku["stock"]}"
+            f"{buku['id_buku']:<5}|"
+            f"{buku['judul_buku']:<50}|"
+            f"Stock : {buku['stock']}"
         )
     print("-"*67)
+
+    judul_diubah = False
 
     while True:
         input_judul_baru = input("Judul buku baru (berdasarkan ID buku): ")
@@ -449,9 +452,11 @@ def update():
             continue
 
         judul_baru = buku_baru["judul_buku"]
+        judul_diubah = True
         break
 
     tanggal_pinjam_baru = input_tanggal("Tanggal pinjam baru (DDMMYYYY) : ", data_ditemukan["tanggal_pinjam"])
+    tanggal_diubah = tanggal_pinjam_baru != data_ditemukan["tanggal_pinjam"]
 
     tanggal_obj = datetime.strptime(tanggal_pinjam_baru, "%d-%m-%Y")
     tanggal_kembali_obj = tanggal_obj + timedelta(days=7)
@@ -463,21 +468,35 @@ def update():
     if judul_baru.strip() == "":
         judul_baru = data_ditemukan["judul_buku"]
 
-    print("\nStatus:")
-    print("1. Dipinjam")
-    print("2. Dikembalikan")
-
-    pilihan_status = input("Pilih status (1/2) : ")
-
-    if pilihan_status == "":
-        status_baru = data_ditemukan["status"]
-    elif pilihan_status == "1":
+    if nama_diubah or judul_diubah or tanggal_diubah:
         status_baru = "Dipinjam"
-    elif pilihan_status == "2":
-        status_baru = "Dikembalikan"
     else:
-        print("Pilihan status tidak valid.")
-        return
+        print("\nStatus:")
+        print("1. Dipinjam")
+        print("2. Dikembalikan")
+
+        while True:
+            pilihan_status = input("Pilih status (1/2) : ")
+
+            if pilihan_status == "":
+                status_baru = data_ditemukan["status"]
+                break
+            elif pilihan_status == "1":
+                status_baru = "Dipinjam"
+                break
+            elif pilihan_status == "2":
+                status_baru = "Dikembalikan"
+                break
+            else:
+                print("Pilihan status yang anda masukkan tidak valid.")
+                print("Masukkan angka 1-2 !")
+                
+
+    if status_lama == "Dipinjam" and status_baru == "Dikembalikan":
+        tanggal_kembali_baru = datetime.today().strftime("%d-%m-%Y")
+    else:
+        tanggal_kembali_baru = tanggal_kembali_obj.strftime("%d-%m-%Y")
+        
 
     print(f"Nama Peminjam : {nama_baru}")
     print(f"Judul Buku : {judul_baru}")
@@ -499,8 +518,28 @@ def update():
                     if buku["judul_buku"] == judul_lama:
                         buku["stock"] += 1
                         break
-            # Mengurangi stock buku baru
-            buku_baru["stock"] -=1
+                # Mengurangi stock buku baru jika statusnya dipinjam
+                if status_baru == "Dipinjam":
+                    buku_baru["stock"] -= 1
+
+            # Jika buku tidak berubah
+            else:
+
+                # Status berubah dari Dipinjam menjadi Dikembalikan
+                if status_lama == "Dipinjam" and status_baru == "Dikembalikan":
+                    for buku in data_buku:
+                        if buku["judul_buku"] == judul_lama:
+                            buku["stock"] += 1
+                            break
+
+                # Status berubah dari Dikembalikan menjadi Dipinjam
+                elif status_lama == "Dikembalikan" and status_baru == "Dipinjam":
+                    for buku in data_buku:
+                        if buku["judul_buku"] == judul_lama:
+                            buku["stock"] -= 1
+                            break
+
+            data_ditemukan["nama_peminjam"] = nama_baru
 
             data_ditemukan["nama_peminjam"] = nama_baru
             data_ditemukan["judul_buku"] = judul_baru

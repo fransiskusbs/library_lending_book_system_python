@@ -7,6 +7,8 @@
 
 # /************************************/
 
+from datetime import date, timedelta
+
 # /===== Data Model =====/
 # Create your data model here
 data_buku = [
@@ -242,16 +244,72 @@ def create():
     print("==========================================")
 
     nama_peminjam = input("Nama peminjam     : ")
-    judul_buku = input("Judul buku        : ")
-    tanggal_pinjam = input("Tanggal pinjam    : ")
-    tanggal_kembali = input("Tanggal kembali   : ")
 
-    # Membuat ID otomatis
-    if len(data_peminjaman) == 0:
-        id_baru = 1
-    else:
-        id_baru = data_peminjaman[-1]["id_peminjaman"] + 1
+    # Menampilkan Daftar Buku
+    print("\n============================DAFTAR BUKU============================")
 
+    for buku in data_buku:
+        print(
+            f"{buku["id_buku"]:<5}|"
+            f"{buku["judul_buku"]:<50}|"
+            f"Stock : {buku["stock"]}"
+        )
+    print("-"*67)
+
+    #Memilih buku berdasarkan id_buku
+    while True:
+        input_id_buku = input("Masukkan ID buku : ")
+
+        if input_id_buku.isdigit():
+            cari_id_buku = int(input_id_buku)
+        else:
+            print("ID buku harus berupa angka !")
+            continue
+
+        # Mencari buku
+        buku_ditemukan = None
+
+        for buku in data_buku:
+            if buku["id_buku"] == cari_id_buku:
+                buku_ditemukan = buku
+                break
+
+        # Validasi ID buku
+        if buku_ditemukan is None:
+            print("ID buku tidak ditemukan !")
+            continue
+
+        # Validasi stock
+        if buku_ditemukan["stock"] <= 0:
+            print("Stock buku sedang habis !")
+            continue
+        break
+
+    # Mengambil judul otomatis berdasarkan ID
+    judul_buku = buku_ditemukan["judul_buku"]
+    print(f"Buku yang dipilih : {judul_buku}")
+
+    # Tanggal pinjam dan tanggal pengembalian
+    tanggal_pinjam = date.today()
+    tanggal_kembali = tanggal_pinjam + timedelta(days=7)
+
+    tanggal_pinjam = tanggal_pinjam.strftime("%d-%m-%Y")
+    tanggal_kembali = tanggal_kembali.strftime("%d-%m-%Y")
+
+    # Membuat ID peminjaman
+    id_baru = 1
+
+    for data in data_peminjaman:
+        if data["id_peminjaman"] == id_baru:
+                    id_baru += 1
+        else:
+            break
+
+    print(f"Nama peminjam : {nama_peminjam}")
+    print(f"Tanggal pinjam    : {tanggal_pinjam}")
+    print(f"Tanggal kembali   : {tanggal_kembali}")
+
+    # Konfirmasi    
     while True:
         konfirmasi = input("Anda yakin untuk menyimpan data ini? (y/n) : ").lower()
 
@@ -264,12 +322,19 @@ def create():
                     "tanggal_kembali": tanggal_kembali,
                     "status": "Dipinjam"}
             data_peminjaman.append(data_baru)
+
+            # Mengurangi stock buku
+            buku_ditemukan["stock"] -= 1
+
+            # Mengurutkan ID peminjaman
+            data_peminjaman.sort(key=lambda data: data['id_peminjaman'])
             print("\nData peminjaman berhasil ditambahkan.")
-            print(f"ID Peminjaman : {id_baru}")
             return
+        
         elif konfirmasi == "n":
             print("Data batal ditambahkan !")
             break
+
         else:
             print("Input yang Anda masukkan tidak valid (y atau n)!")
 
@@ -283,6 +348,28 @@ def update():
     if len(data_peminjaman) == 0:
         print("Belum ada data peminjaman.")
         return
+
+    print("-" * 126)
+    print(
+        f"{'ID':<5}|"
+        f"{'Nama Peminjam':<20}|"
+        f"{'Judul Buku':<50}|"
+        f"{'Tgl Pinjam':<15}|"
+        f"{'Tgl Kembali':<15}|"
+        f"{'Status':<15}|"
+        )
+    print("-" * 126)
+    
+    for data in data_peminjaman:
+        print(
+            f"{data['id_peminjaman']:<5}|"
+            f"{data['nama_peminjam'].title():<20}|"
+            f"{data['judul_buku'].title():<50}|"
+            f"{data['tanggal_pinjam']:<15}|"
+            f"{data['tanggal_kembali']:<15}|"
+            f"{data['status'].title():<15}|"
+            )
+    print("-" * 126)
 
     while True:
         input_update = input("Masukkan ID peminjaman : ")

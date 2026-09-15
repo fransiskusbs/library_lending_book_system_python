@@ -118,37 +118,121 @@ def read():
 # SEARCH
 
 def search():
-    keyword = input("Masukkan kata kunci : ").lower()
+    while True:
+        print("\n==========================================")
+        print("     PENCARIAN DATA PEMINJAMAN BUKU")
+        print("==========================================")
+        print("1. Berdasarkan status (dipinjam / dikembalikan)")
+        print("2. Berdasarkan nama peminjam dan judul buku")
+        print("3. Kembali")
 
-    cari = False
+        input_search = input("Masukkan pilihan menu : ").lower()
 
-    print("-"*126)
-    print(
-        f"{'ID':<5}|"
-        f"{'Nama Peminjam':<20}|"
-        f"{'Judul Buku':<50}|"
-        f"{'Tgl Pinjam':<15}|"
-        f"{'Tgl Kembali':<15}|"
-        f"{'Status':<15}|"
-        )
-    print("-" * 126)
-    for data in data_peminjaman:
-        if (keyword in data["nama_peminjam"].lower()
-                or keyword in data["judul_buku"].lower()
-                or keyword in data["status"].lower()):
-            cari = True
+        if input_search == "1":
+            while True:
+                print("\n==========================================")
+                print("     PENCARIAN DATA PEMINJAMAN BUKU")
+                print("==========================================")
+                print("1. Dipinjam")
+                print("2. Dikembalikan")
+                print("3. Kembali")
+
+                status_cari = input("Masukkan pilihan menu : ")
+
+                if status_cari == "1":
+                    keyword = 'dipinjam'
+                    print("-"*126)
+                    print(
+                        f"{'ID':<5}|"
+                        f"{'Nama Peminjam':<20}|"
+                        f"{'Judul Buku':<50}|"
+                        f"{'Tgl Pinjam':<15}|"
+                        f"{'Tgl Kembali':<15}|"
+                        f"{'Status':<15}|"
+                        )
+                    print("-" * 126)
+                    for data in data_peminjaman:
+                        if (keyword in data["status"].lower()):
+                            cari = True
+                            print(
+                                f"{data['id_peminjaman']:<5}|"
+                                f"{data['nama_peminjam'].title():<20}|"
+                                f"{data['judul_buku'].title():<50}|"
+                                f"{data['tanggal_pinjam']:<15}|"
+                                f"{data['tanggal_kembali']:<15}|"
+                                f"{data['status'].title():<15}|"
+                                )
+                            print("-" * 126)
+
+                elif status_cari == "2":
+                    keyword = 'dikembalikan'
+                    print("-"*126)
+                    print(
+                        f"{'ID':<5}|"
+                        f"{'Nama Peminjam':<20}|"
+                        f"{'Judul Buku':<50}|"
+                        f"{'Tgl Pinjam':<15}|"
+                        f"{'Tgl Kembali':<15}|"
+                        f"{'Status':<15}|"
+                        )
+                    print("-" * 126)
+                    for data in data_peminjaman:
+                        if (keyword in data["status"].lower()):
+                            cari = True
+                            print(
+                                f"{data['id_peminjaman']:<5}|"
+                                f"{data['nama_peminjam'].title():<20}|"
+                                f"{data['judul_buku'].title():<50}|"
+                                f"{data['tanggal_pinjam']:<15}|"
+                                f"{data['tanggal_kembali']:<15}|"
+                                f"{data['status'].title():<15}|"
+                                )
+                            print("-" * 126)
+                elif status_cari == "3":
+                    break
+                else:
+                    print("Input yang Anda masukkan tidak valid !")
+                    print("Masukkan angka 1-3 !")
+
+        elif input_search == "2":
+
+            keyword_cari = input("Masukkan nama peminjam atau judul buku : ").lower()
+
+            cari = False
+
+            print("-"*126)
             print(
-                f"{data['id_peminjaman']:<5}|"
-                f"{data['nama_peminjam'].title():<20}|"
-                f"{data['judul_buku'].title():<50}|"
-                f"{data['tanggal_pinjam']:<15}|"
-                f"{data['tanggal_kembali']:<15}|"
-                f"{data['status'].title():<15}|"
+                f"{'ID':<5}|"
+                f"{'Nama Peminjam':<20}|"
+                f"{'Judul Buku':<50}|"
+                f"{'Tgl Pinjam':<15}|"
+                f"{'Tgl Kembali':<15}|"
+                f"{'Status':<15}|"
                 )
             print("-" * 126)
+            for data in data_peminjaman:
+                if (keyword_cari in data["nama_peminjam"].lower()
+                        or keyword_cari in data["judul_buku"].lower()):
+                    cari = True
+                    print(
+                        f"{data['id_peminjaman']:<5}|"
+                        f"{data['nama_peminjam'].title():<20}|"
+                        f"{data['judul_buku'].title():<50}|"
+                        f"{data['tanggal_pinjam']:<15}|"
+                        f"{data['tanggal_kembali']:<15}|"
+                        f"{data['status'].title():<15}|"
+                        )
+                    print("-" * 126)
 
-    if cari == False:
-        print("Data tidak ditemukan")
+            if cari == False:
+                print("Data tidak ditemukan")
+
+        elif input_search == "3":
+            break
+        else:
+            print("Input yang Anda masukkan tidak valid !")
+            print("Masukkan angka 1-3 !")
+
 
 # CREATE
 
